@@ -1,0 +1,175 @@
+:root {
+  --bronze-gold: #d4af37;
+}
+
+@font-face {
+  font-family: "UTM Dayland";
+  src: url("../fonts/SVN-Dayland.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.dayland-text {
+  font-family: "UTM Dayland", cursive;
+  color: var(--bronze-gold); /* màu chữ vàng như ảnh */
+  text-shadow: 0 0 2px #cabb58, 0 0 4px #e3d37a;
+  font-size: 1.5rem;
+}
+
+.navigater-link {
+  font-weight: 600;
+  color: #ffffff;
+}
+.navigater-link:hover {
+  color: #bf922d;
+}
+.video-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hotline-area {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  opacity: 1;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  z-index: 20;
+}
+.hotline-number {
+  color: #111111;
+  padding: 12px 20px;
+  border-radius: 50px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: bold;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+.hotline-number svg {
+  width: 24px;
+  height: 24px;
+}
+
+.gradient-button {
+  background: linear-gradient(
+    270deg,
+    #c39835 0%,
+    #fbf3a6 23.9%,
+    #c39835 50.4%,
+    #fbf3a6 79.4%,
+    #bf922d 100%
+  );
+}
+.gradient-button:hover {
+  background: linear-gradient(
+    270deg,
+    #9c7b2d 0%,
+    #beb87f 23.9%,
+    #8d6e27 50.4%,
+    #b4ae77 79.4%,
+    #8f6e21 100%
+  );
+}
+
+.background-gradient {
+  background: linear-gradient(
+    70deg,
+    #c39835 0%,
+    #fbf3a6 23.9%,
+    #c39835 50.4%,
+    #fbf3a6 79.4%,
+    #bf922d 100%
+  );
+}
+.mystical-gradient {
+  background: linear-gradient(135deg, #000000 0%, #1d1d1d 50%, #000000 100%);
+}
+
+.info-box {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  bottom: 20px;
+  right: 20px;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.7);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  max-width: 250px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+.info-box a {
+  color: var(--bronze-gold);
+}
+.info-box a:hover {
+  text-shadow: 0 0 2px #cabb58, 0 0 4px #e3d37a;
+}
+
+.error {
+  border-color: #ef4444;
+}
+.error-text {
+  color: #ef4444;
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+}
+
+.map-container {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+  height: 0;
+  overflow: hidden;
+}
+.map-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+.marquee {
+  white-space: nowrap;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.7);
+  color: #ffd700;
+  font-size: 1.25rem;
+  font-weight: bold;
+  padding: 0.5rem 0;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+.marquee-content {
+  display: inline-block;
+  animation: marquee 15s linear infinite;
+}
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+@media (max-width: 640px) {
+  .marquee {
+    font-size: 1rem;
+    padding: 0.15rem 0;
+  }
+
+  .dayland-text {
+    font-size: 0.7rem;
+  }
+}
