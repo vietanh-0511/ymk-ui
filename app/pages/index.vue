@@ -21,7 +21,7 @@
   <section id="home" class="relative h-screen overflow-hidden max-sm:min-h-[700px]">
     <img class="video-bg lg:hidden" />
     <img class="video-bg max-lg:hidden" src="/assets/img/NKO_1095.webp" />
-    <div class="bg-black bg-opacity-70 h-full flex flex-col justify-center items-center text-center px-4 relative z-0">
+    <div class="bg-black/75 h-full flex flex-col justify-center items-center text-center px-4 relative z-0">
       <!-- Zalo QR -->
       <div class="absolute h-[150px] max-sm:h-[100px] w-[150px] max-sm:w-[100px] top-[120px] right-[20px]">
         <img src="/assets/img/zalo_qr.jpg" alt="Zalo" />
@@ -29,8 +29,8 @@
 
       <div class="relative w-[320px] h-[215px] rounded-lg overflow-hidden shadow-lg">
         <!-- Background Image -->
-        <div class="absolute inset-0 bg-cover bg-center"
-          style="background-image: url('/assets/img/black_bg_logo.png')"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('/assets/img/black_bg_logo.png')">
+        </div>
         <!-- Overlay -->
         <div class="absolute inset-0 flex flex-col items-center justify-end p-2">
           <!-- Content -->
@@ -107,43 +107,19 @@
   <!-- Features Section with Background Image -->
   <section id="features" class="bg-cover bg-center relative 2xl:aspect-[16/6] xl:aspect-[16/8] lg:aspect-[16/10]"
     style="background-image: url('/assets/img/NKO_1004.webp')">
-    <div class="bg-black bg-opacity-60 py-16 h-full">
-      <div class="max-w-6xl mx-auto bg-black bg-opacity-50 rounded-md p-7">
+    <div class="bg-black/60 py-16 h-full">
+      <div class="max-w-6xl mx-auto text-white bg-black/50 rounded-md p-7">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
           Y&M Karaoke
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div class="text-center">
-            <img src="/assets/img/NKO_0960.webp" alt="Room 1" class="mx-auto mb-4 rounded-lg" />
+          <div v-for="item in features" :key="item.title" class="text-center">
+            <img :src="item.image" alt="Room 1" class="mx-auto mb-4 rounded-lg" />
             <h3 class="text-xl font-semibold mb-2">
-              Không gian hiện đại – Phòng hát đa phong cách
+              {{ item.title }}
             </h3>
             <p>
-              Y&M Karaoke sở hữu nhiều phòng hát với thiết kế đa dạng từ sang
-              trọng, lãng mạn đến năng động, phù hợp cho mọi nhu cầu từ hội
-              nhóm, gia đình đến tiệc sinh nhật.
-            </p>
-          </div>
-          <div class="text-center">
-            <img src="/assets/img/NKO_1028.webp" alt="Room 2" class="mx-auto mb-4 rounded-lg" />
-            <h3 class="text-xl font-semibold mb-2">
-              Âm thanh – Ánh sáng đỉnh cao
-            </h3>
-            <p>
-              Trang bị hệ thống âm thanh chất lượng cao, ánh sáng LED điều
-              chỉnh theo nhạc, Y&M Karaoke mang đến trải nghiệm giải trí sống
-              động như sân khấu thực thụ.
-            </p>
-          </div>
-          <div class="text-center">
-            <img src="/assets/img/NKO_0998.webp" alt="Room 3" class="mx-auto mb-4 rounded-lg" />
-            <h3 class="text-xl font-semibold mb-2">
-              Dịch vụ chuyên nghiệp – Giá cả hợp lý
-            </h3>
-            <p>
-              Đội ngũ nhân viên thân thiện, phục vụ nhanh chóng. Giá phòng và
-              combo đồ ăn, nước uống được thiết kế hợp lý – vừa túi tiền, lại
-              nhiều ưu đãi hấp dẫn.
+              {{ item.description }}
             </p>
           </div>
         </div>
@@ -154,38 +130,15 @@
   <!-- Pricing Section with Background Image -->
   <section id="pricing" class="bg-cover bg-center relative 2xl:aspect-[16/6] xl:aspect-[16/8] lg:aspect-[16/10]"
     style="background-image: url('/assets/img/NKO_0994.webp')">
-    <div class="bg-black bg-opacity-60 py-16 px-5 h-full">
+    <div class="bg-black/60 py-16 px-5 h-full">
       <div class="max-w-6xl mx-auto">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
           Chương trình khuyến mãi
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8 max-lg:gap-4 text-black">
-          <div class="p-6 rounded-lg text-center background-gradient">
-            <p class="text-2xl font-bold mb-4">Ưu đãi giờ vàng</p>
-            <p>
-              Từ 12h đến 18h mỗi ngày, khách hàng được
-              <b>giảm 50% giờ hát</b>.Ưu đãi áp dụng xuyên suốt các ngày trong
-              tuần
-            </p>
-          </div>
-          <div class="p-6 rounded-lg text-center background-gradient">
-            <p class="text-2xl font-bold mb-4">Giảm ngay 10% khi checkin</p>
-            <p>
-              Check-in tại quán, đánh giá 5 sao và để lại 5 bình luận trên
-              Google Maps để nhận <b>giảm 10% trên tổng bill</b>. Lan tỏa trải
-              nghiệm tuyệt vời cùng bạn bè và nhận quà liền tay!
-            </p>
-          </div>
-          <div class="p-6 rounded-lg text-center background-gradient">
-            <p class="text-2xl font-bold mb-4">Thẻ Siêu VIP</p>
-            <p>Miễn phí giờ hát từ 12h đến 24h mỗi ngày</p>
-            <p>Tặng bánh kem và trang trí phòng khi tổ chức sinh nhật</p>
-            <p>
-              Chiết khấu 10% tổng bill mỗi lần giới thiệu khách đến check-in
-              và đánh giá 5 sao
-            </p>
-            <p>Cấp mã số ưu tiên khi đặt phòng</p>
-            <p>Hiệu lực sử dụng: 3 tháng</p>
+          <div v-for="item in promotions" :key="item.title" class="p-6 rounded-lg text-center background-gradient">
+            <p class="text-2xl font-bold mb-4">{{ item.title }}</p>
+            <p v-html="item.description"></p>
           </div>
         </div>
       </div>
@@ -194,7 +147,7 @@
 
   <!-- Google Maps Section -->
   <section id="location" class="bg-cover bg-center" style="background-image: url('/assets/img/NKO_1090.webp')">
-    <div class="bg-black bg-opacity-60 py-16 px-5 h-full">
+    <div class="bg-black/60 py-16 px-5 h-full">
       <div class="max-w-6xl mx-auto px-4 sm:px-6">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
           Bản đồ
@@ -209,3 +162,46 @@
     </div>
   </section>
 </template>
+
+<script setup lang="ts">
+import { ref } from 'vue';
+
+const features = ref([
+  {
+    title: 'Không gian hiện đại – Phòng hát đa phong cách',
+    description:
+      'Y&M Karaoke sở hữu nhiều phòng hát với thiết kế đa dạng từ sang trọng, lãng mạn đến năng động, phù hợp cho mọi nhu cầu từ hội nhóm, gia đình đến tiệc sinh nhật.',
+    image: '/assets/img/NKO_0960.webp',
+  },
+  {
+    title: 'Âm thanh – Ánh sáng đỉnh cao',
+    description:
+      'Trang bị hệ thống âm thanh chất lượng cao, ánh sáng LED điều chỉnh theo nhạc, Y&M Karaoke mang đến trải nghiệm giải trí sống động như sân khấu thực thụ.',
+    image: '/assets/img/NKO_1028.webp',
+  },
+  {
+    title: 'Dịch vụ chuyên nghiệp – Giá cả hợp lý',
+    description:
+      'Đội ngũ nhân viên thân thiện, phục vụ nhanh chóng. Giá phòng và combo đồ ăn, nước uống được thiết kế hợp lý – vừa túi tiền, lại nhiều ưu đãi hấp dẫn.',
+    image: '/assets/img/NKO_0998.webp',
+  },
+]);
+
+const promotions = ref([
+  {
+    title: 'Ưu đãi giờ vàng',
+    description:
+      'Từ 12h đến 18h mỗi ngày, khách hàng được giảm \n50% giờ hát. \nƯu đãi áp dụng xuyên suốt các ngày trong tuần.',
+  },
+  {
+    title: 'Giảm ngay 10% khi checkin',
+    description:
+      'Check-in tại quán, đánh giá 5 sao và để lại 5 bình luận trên Google Maps để nhận \ngiảm 10% trên tổng bill. \nLan tỏa trải nghiệm tuyệt vời cùng bạn bè và nhận quà liền tay!',
+  },
+  {
+    title: 'Thẻ Siêu VIP',
+    description:
+      'Miễn phí giờ hát từ 12h đến 24h mỗi ngày. \nTặng bánh kem và trang trí phòng khi tổ chức sinh nhật. \nChiết khấu 10% tổng bill mỗi lần giới thiệu khách đến check-in và đánh giá 5 sao. \nCấp mã số ưu tiên khi đặt phòng. Hiệu lực sử dụng: 3 tháng.',
+  },
+]);
+</script>
