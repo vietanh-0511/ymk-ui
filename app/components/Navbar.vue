@@ -35,11 +35,11 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onMounted, onUnmounted, useTemplateRef } from 'vue'
 
 const isMenuOpen = ref(false)
-const menuBtn = ref<HTMLElement | null>(null)
-const mobileMenu = ref<HTMLElement | null>(null)
+const menuBtn = useTemplateRef<HTMLButtonElement>('menuBtn') // Reference to the menu button from vue 3.5 >
+const mobileMenu = ref<HTMLElement | null>(null) // Vue 3.0 – 3.4
 const navItems = ref([{ label: 'Trang Chủ', href: '#home' }, { label: 'Giới Thiệu', href: '#features' }, { label: 'Khuyến Mãi', href: '#pricing' }, { label: 'Bản Đồ', href: '#location' }])
 
 const toggleMenu = () => {
