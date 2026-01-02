@@ -7,6 +7,7 @@ export default defineNuxtConfig({
       titleTemplate: 'Y&M Karaoke'
     }
   },
+  modules: ['@pinia/nuxt'],
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
   css: ['./app/assets/css/tailwind.css', './app/assets/css/main.css'],
@@ -15,4 +16,9 @@ export default defineNuxtConfig({
       tailwindcss(),
     ],
   },
+  runtimeConfig: {
+    public: {
+      apiBase: ''
+    }
+  }
 })

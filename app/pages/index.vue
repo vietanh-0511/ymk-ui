@@ -74,13 +74,13 @@
           Y&M Karaoke
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div v-for="item in features" :key="item.title" class="text-center">
+          <div v-for="item in data" :key="item.id" class="text-center">
             <img :src="item.image" alt="Room 1" class="mx-auto mb-4 rounded-lg" />
             <h3 class="text-xl font-semibold mb-2">
-              {{ item.title }}
+              {{ item.name }}
             </h3>
             <p>
-              {{ item.description }}
+              {{ item.price }}
             </p>
           </div>
         </div>
@@ -123,12 +123,26 @@
     </div>
   </section>
   <!-- Booking Modal -->
-  <BookingModal :isVisible="isBookingModalVisible" @close="isBookingModalVisible = false" />
+  <BookingModal :bookingData="bookingData" :isVisible="isBookingModalVisible" @close="isBookingModalVisible = false" />
 </template>
 
 <script setup lang="ts">
 import { ref } from 'vue';
+import { useInformationStore } from '@/stores/informationStore';
 
+const data = ref<any>();
+
+const {getInfo} = useInformationStore();
+const fetchData = async () => {
+   const res = await getInfo();
+   if (res?.products) {
+     data.value = res.products;
+   }
+};
+
+onMounted(() => {
+  fetchData();
+});
 const features = ref([
   {
     title: 'Không gian hiện đại – Phòng hát đa phong cách',
@@ -149,7 +163,6 @@ const features = ref([
     image: '/assets/img/NKO_0998.webp',
   },
 ]);
-
 const promotions = ref([
   {
     title: 'Ưu đãi giờ vàng',
@@ -168,8 +181,19 @@ const promotions = ref([
   },
 ]);
 
+const bookingData = ref({
+    name: '',
+    email: '',
+    date: ''
+  });
+
 const isBookingModalVisible = ref(false);
 const openBookingModal = () => {
+  bookingData.value = {
+    name: 'name',
+    email: 'email',
+    date: '20/12/2025'
+  };
   isBookingModalVisible.value = true;
 };
 </script>

@@ -27,22 +27,22 @@
 </template>
 <script setup lang="ts">
     const props = defineProps<{
-        isVisible: boolean
+        isVisible: boolean,
+        bookingData: {
+            name: string,
+            email: string,
+            date: string
+        }
     }>();
     const emits = defineEmits<{
         (e: 'close'): void;
     }>();
-    const bookingData = ref({
-        name: '',
-        email: '',
-        date: ''
-    });
     const closeModal = () => {
         emits('close');
     };
     const submitBooking = () => {
         // Xử lý dữ liệu đặt chỗ ở đây (gửi đến server hoặc lưu trữ)
-        console.log('Booking Data:', bookingData.value);
+        console.log('Booking Data:', props.bookingData);
         // Đóng modal sau khi gửi
         closeModal();
     };
