@@ -128,21 +128,8 @@
 
 <script setup lang="ts">
 import { ref } from 'vue';
-import { useInformationStore } from '@/stores/informationStore';
-
-const data = ref<any>();
-
-const {getInfo} = useInformationStore();
-const fetchData = async () => {
-   const res = await getInfo();
-   if (res?.products) {
-     data.value = res.products;
-   }
-};
-
-onMounted(() => {
-  fetchData();
-});
+import { useInformationApi } from '~/composables/api/useInformationApi';
+import type { Information } from '~/types/Information';
 const features = ref([
   {
     title: 'Không gian hiện đại – Phòng hát đa phong cách',
@@ -196,4 +183,17 @@ const openBookingModal = () => {
   };
   isBookingModalVisible.value = true;
 };
+const data = ref<Information[]>();
+
+const {getList} = useInformationApi();
+const fetchData = async () => {
+   const res = await getList();
+   data.value = res?.data ? res.data : [];
+};
+
+onMounted(() => {
+  fetchData();
+});
+
+
 </script>
