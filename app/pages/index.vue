@@ -70,17 +70,17 @@
     style="background-image: url('/assets/img/NKO_1004.webp')">
     <div class="bg-black/60 py-16 h-full">
       <div class="max-w-6xl mx-auto text-white bg-black/50 rounded-md p-7">
-        <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
+        <h2 class="text-3xl text-white md:text-4xl font-bold text-center mb-12">
           Y&M Karaoke
         </h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-          <div v-for="item in data" :key="item.id" class="text-center">
+          <div v-for="item in features" :key="item.id" class="text-center">
             <img :src="item.image" alt="Room 1" class="mx-auto mb-4 rounded-lg" />
             <h3 class="text-xl font-semibold mb-2">
-              {{ item.name }}
+              {{ item.title }}
             </h3>
             <p>
-              {{ item.price }}
+              {{ item.description }}
             </p>
           </div>
         </div>
@@ -92,7 +92,7 @@
   <section id="pricing" class="bg-cover bg-center relative 2xl:aspect-[16/6] xl:aspect-[16/8] lg:aspect-[16/10]"
     style="background-image: url('/assets/img/NKO_0994.webp')">
     <div class="bg-black/60 py-16 px-5 h-full">
-      <div class="max-w-6xl mx-auto">
+      <div class="max-w-6xl mx-auto text-white bg-black/50 rounded-md p-7">
         <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">
           Chương trình khuyến mãi
         </h2>
@@ -123,64 +123,18 @@
     </div>
   </section>
   <!-- Booking Modal -->
-  <BookingModal :bookingData="bookingData" :isVisible="isBookingModalVisible" @close="isBookingModalVisible = false" />
+  <BookingModal :isVisible="isBookingModalVisible" @close="isBookingModalVisible = false" />
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue';
-import { useInformationApi } from '~/composables/api/useInformationApi';
-import type { Information } from '~/types/Information';
-const features = ref([
-  {
-    title: 'Không gian hiện đại – Phòng hát đa phong cách',
-    description:
-      'Y&M Karaoke sở hữu nhiều phòng hát với thiết kế đa dạng từ sang trọng, lãng mạn đến năng động, phù hợp cho mọi nhu cầu từ hội nhóm, gia đình đến tiệc sinh nhật.',
-    image: '/assets/img/NKO_0960.webp',
-  },
-  {
-    title: 'Âm thanh – Ánh sáng đỉnh cao',
-    description:
-      'Trang bị hệ thống âm thanh chất lượng cao, ánh sáng LED điều chỉnh theo nhạc, Y&M Karaoke mang đến trải nghiệm giải trí sống động như sân khấu thực thụ.',
-    image: '/assets/img/NKO_1028.webp',
-  },
-  {
-    title: 'Dịch vụ chuyên nghiệp – Giá cả hợp lý',
-    description:
-      'Đội ngũ nhân viên thân thiện, phục vụ nhanh chóng. Giá phòng và combo đồ ăn, nước uống được thiết kế hợp lý – vừa túi tiền, lại nhiều ưu đãi hấp dẫn.',
-    image: '/assets/img/NKO_0998.webp',
-  },
-]);
-const promotions = ref([
-  {
-    title: 'Ưu đãi giờ vàng',
-    description:
-      'Từ 12h đến 18h mỗi ngày, khách hàng được giảm \n50% giờ hát. \nƯu đãi áp dụng xuyên suốt các ngày trong tuần.',
-  },
-  {
-    title: 'Giảm ngay 10% khi checkin',
-    description:
-      'Check-in tại quán, đánh giá 5 sao và để lại 5 bình luận trên Google Maps để nhận \ngiảm 10% trên tổng bill. \nLan tỏa trải nghiệm tuyệt vời cùng bạn bè và nhận quà liền tay!',
-  },
-  {
-    title: 'Thẻ Siêu VIP',
-    description:
-      'Miễn phí giờ hát từ 12h đến 24h mỗi ngày. \nTặng bánh kem và trang trí phòng khi tổ chức sinh nhật. \nChiết khấu 10% tổng bill mỗi lần giới thiệu khách đến check-in và đánh giá 5 sao. \nCấp mã số ưu tiên khi đặt phòng. Hiệu lực sử dụng: 3 tháng.',
-  },
-]);
-
-const bookingData = ref({
-    name: '',
-    email: '',
-    date: ''
-  });
+import { onMounted, ref } from 'vue';
+import { useInformationApi } from '../composables/api/useInformationApi';
+import type { Information } from '../types/Information';
 
 const isBookingModalVisible = ref(false);
+const features = ref();
+const promotions = ref();
 const openBookingModal = () => {
-  bookingData.value = {
-    name: 'name',
-    email: 'email',
-    date: '20/12/2025'
-  };
   isBookingModalVisible.value = true;
 };
 const data = ref<Information[]>();
@@ -189,11 +143,12 @@ const {getList} = useInformationApi();
 const fetchData = async () => {
    const res = await getList();
    data.value = res?.data ? res.data : [];
+   features.value = data.value.filter(item => item.type === 1);
+   promotions.value = data.value.filter(item => item.type === 2);
 };
 
 onMounted(() => {
   fetchData();
 });
-
 
 </script>
