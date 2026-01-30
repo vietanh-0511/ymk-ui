@@ -1,6 +1,7 @@
 export interface Information {
     id: number;
-    name: string;
-    price: string;
+    title: string;
+    description: string;
     image: string;
+    type: number;
 }
