@@ -123,13 +123,15 @@
     </div>
   </section>
   <!-- Booking Modal -->
-  <BookingModal :isVisible="isBookingModalVisible" @close="isBookingModalVisible = false" />
+  <BookingModal :isVisible="isBookingModalVisible" :roomList="rooms" @close="isBookingModalVisible = false" />
 </template>
 
 <script setup lang="ts">
 import { onMounted, ref } from 'vue';
 import { useInformationApi } from '../composables/api/useInformationApi';
 import type { Information } from '../types/Information';
+import { useRoomApi } from '~/composables/api/useRoomApi';
+import type { Room } from '~/types/Room';
 
 const isBookingModalVisible = ref(false);
 const features = ref();
@@ -137,14 +139,20 @@ const promotions = ref();
 const openBookingModal = () => {
   isBookingModalVisible.value = true;
 };
-const data = ref<Information[]>();
+const informations = ref<Information[]>();
+const rooms = ref<Room[]>();
 
-const {getList} = useInformationApi();
+const {getList: getInformationList} = useInformationApi();
+const {getList: getRoomList} = useRoomApi();
 const fetchData = async () => {
-   const res = await getList();
-   data.value = res?.data ? res.data : [];
-   features.value = data.value.filter(item => item.type === 1);
-   promotions.value = data.value.filter(item => item.type === 2);
+   const infomationList = await getInformationList();
+   const roomList = await getRoomList();
+   console.log('roomList', roomList);
+   console.log('infomationList', infomationList);
+   rooms.value = roomList?.data ? roomList.data : [];
+   informations.value = infomationList?.data ? infomationList.data : [];
+   features.value = informations.value.filter(item => item.type === 1);
+   promotions.value = informations.value.filter(item => item.type === 2);
 };
 
 onMounted(() => {

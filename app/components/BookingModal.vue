@@ -28,7 +28,7 @@
                     <label for="room" class="block text-gray-700 mb-2">Phòng hát</label>
                     <select v-model="bookingData.room" id="room" class="w-full px-3 py-2 border rounded" :disabled="!bookingData.roomType || isOutOfTime" required>
                         <option value="">Chọn phòng hát</option>
-                        <option v-for="room in availableRooms" :key="room.id" :value="room.id">{{ room.name }}</option>
+                        <option v-for="room in availableRooms" :key="room.id" :value="room.id">{{ room.roomName }}</option>
                     </select>
                     <div v-if="isOutOfTime" class="text-sm text-red-500 mt-1">Hết phòng</div>
                 </div>
@@ -47,21 +47,10 @@ import { ref, computed, watchEffect } from 'vue';
 import { useBookingApi } from '../composables/api/useBookingApi';
 import type { Room } from '../types/Room';
 
-    const allRooms: Room[] = [
-        { id: 'vip-1', name: 'VIP 1', type: '1' },
-        { id: 'vip-2', name: 'VIP 2', type: '1' },
-        { id: 'vip-3', name: 'VIP 3', type: '1' },
-        { id: 'vip-4', name: 'VIP 4', type: '1' },
-        { id: 'vip-5', name: 'VIP 5', type: '1' },
-        { id: 'thuong-1', name: 'Phòng 1', type: '2' },
-        { id: 'thuong-2', name: 'Phòng 2', type: '2' },
-        { id: 'thuong-3', name: 'Phòng 3', type: '2' },
-        { id: 'thuong-4', name: 'Phòng 4', type: '2' },
-        { id: 'thuong-5', name: 'Phòng 5', type: '2' },
-        { id: 'thuong-6', name: 'Phòng 6', type: '2' },
-        { id: 'thuong-7', name: 'Phòng 7', type: '2' },
-        { id: 'thuong-8', name: 'Phòng 8', type: '2' },
-    ];
+    const props = defineProps<{
+        isVisible: boolean,
+        roomList?: Room[]
+    }>();
 
     const bookingData = ref({
         name: '',
@@ -86,14 +75,12 @@ import type { Room } from '../types/Room';
 
     const availableRooms = computed(() => {
         if (!bookingData.value.roomType) {
-            return [];
+            return props?.roomList ? props.roomList : [];
         }
-        return allRooms.filter(room => room.type === bookingData.value.roomType);
+        console.log('Filtering rooms for type:', bookingData.value.roomType);
+        return props?.roomList ? props.roomList.filter(room => room.roomType === bookingData.value.roomType) : [];
     });
-
-    const props = defineProps<{
-        isVisible: boolean
-    }>();
+    
     const emits = defineEmits<{
         (e: 'close'): void;
     }>();
